@@ -67,5 +67,6 @@ contract Aluguel
         for (uint i=1; i <mesesRestantes; i++){
             valor = valor+((valor*percentual)/100);
             }
+   // i é um indice que nesse caso são meses
     }
 }
