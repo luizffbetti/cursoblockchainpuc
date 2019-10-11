@@ -37,11 +37,11 @@ contract CompraeVenda
     }
     
     function valorAtualizado (uint256 valorDoBem, uint256 multaInadimplencia) public returns (uint256 valorAtual) 
-    {
+        {
         // O valor atualizado é o valor do bem mais a multa
         valorAtual = (valorDoBem+multaInadimplencia);
         valor = valorAtualizado;
-    }
+        }
     
     function multaInadimplenciaPelaMetade (uint valorDoBem, uint prazo, uint multaInadimplencia) public returns (uint multaInadimplenciaPelaMetade)
     {
@@ -55,12 +55,11 @@ contract CompraeVenda
         }
     }
     
-    
-    
-      function rescisão( uint prazoParaPagamento, uint dias) public
+    function rescisão( uint prazoParaPagamento, uint dias) public
     {
         require (prazoParaPagamento > 12, "rescisão");
         for (uint i=1; i <prazoParaPagamento; i++){
             ;
             }  
     }
+        
