@@ -57,7 +57,7 @@ contract CompraeVenda
     
     function rescisão( uint prazoParaPagamento, uint dias, prazoMaximoDePagamento) public
     {
-        require (prazoParaPagamento > 12, "rescisão");
+        require (prazoParaPagamento > 30, "rescisão");
         for (uint i=1; i <prazoParaPagamento; i++){
             
             }  
