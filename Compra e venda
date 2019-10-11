@@ -1,0 +1,66 @@
+pragma solidity 0.5.12;
+
+contract CompraeVenda
+{
+    
+    string public comprador;
+    string public vendedor;
+    uint public valorDoBem;
+    uint public multaInadimplencia;
+    uint public prazo;
+    // Multa de 20% em, caso de não pagamento
+    uint256 constant percentualMulta = 20;
+    uint constant prazoParaPagamento = 10;
+   //prazo em dias , multa de 20%
+   
+    constructor (string memory nomeComprador, string memory nomeVendedor, uint valorDoBem, uint256 prazoParaPagamento) public 
+    {
+        comprador = nomeComprador;
+        vendedor = nomeVendedor;
+        valorDoBem= valorVenda;
+        prazo = prazoParaPagamento;
+    }
+    
+    function valorMulta () public view returns (uint)
+    {
+        if (prazoParaPagamento < 10)
+        {
+            return valorDoBem;
+        }
+        
+       if (prazoParaPagamento > 10)
+        {
+            percentualMulta = (percentualMulta*valorDoBem)/100;
+            multaInadimplencia = (valorDoBem*percentualMulta);
+            return multaInadimplencia;
+        }
+    }
+    
+    function valorAtualizado (uint256 valorDoBem, uint256 multaInadimplencia) public returns (uint256 valorAtual) 
+    {
+        // O valor atualizado é o valor do bem mais a multa
+        valorAtual = (valorDoBem+multaInadimplencia);
+        valor = valorAtualizado;
+    }
+    
+    function multaInadimplenciaPelaMetade (uint valorDoBem, uint prazo, uint multaInadimplencia) public returns (uint multaInadimplenciaPelaMetade)
+    {
+   
+        if (prazoParaPagamento > 10 && prazoParaPagamento < 12)
+        {
+        percentualMulta = (percentualMulta*valorDoBem)/100;
+        multaInadimplencia = (valorDoBem*percentualMulta);
+        multaInadimplencia/2;
+        return multaInadimplenciaPelaMetade;
+        }
+    }
+    
+    
+    
+      function rescisão( uint prazoParaPagamento, uint dias) public
+    {
+        require (prazoParaPagamento > 12, "rescisão");
+        for (uint i=1; i <prazoParaPagamento; i++){
+            ;
+            }  
+    }
