@@ -59,7 +59,6 @@ contract CompraeVenda
     {
         require (prazoParaPagamento > 12, "rescisão");
         for (uint i=1; i <prazoParaPagamento; i++){
-            ;
-            }  
+    }  
     }
         
