@@ -1,64 +1,48 @@
 pragma solidity 0.5.12;
 
-contract CompraeVenda
-{
+contract CompraeVenda{
     
     string public comprador;
     string public vendedor;
     uint public valorDoBem;
-    uint public multaInadimplencia;
-    uint public prazo;
-    // Multa de 20% em, caso de não pagamento
     uint256 constant percentualMulta = 20;
-    uint constant prazoParaPagamento = 10;
-   //prazo em dias , multa de 20%
+    uint public prazoParaPagamento;
+    uint public prazoParaRescisao;
+    bool public contratoAtivo;
    
-    constructor (string memory nomeComprador, string memory nomeVendedor, uint valorDoBem, uint256 prazoParaPagamento) public 
+    constructor (string memory _comprador, string memory _vendedor, uint _valorDoBem) public 
     {
-        comprador = nomeComprador;
-        vendedor = nomeVendedor;
-        valorDoBem= valorVenda;
-        prazo = prazoParaPagamento;
+        comprador = _comprador;
+        vendedor = _vendedor;
+        valorDoBem = _valorDoBem;
+        prazoParaPagamento = now+604800;
+        prazoParaRescisao = now+2629743; 
+        contratoAtivo = true;
     }
     
-    function valorMulta () public view returns (uint)
-    {
-        if (prazoParaPagamento < 10)
-        {
-            return valorDoBem;
+    
+    function valorAtualizado () public view returns (uint256) {
+        uint valorAtual;
+        if (now<prazoParaPagamento){
+            valorAtual = valorDoBem;
+            return (valorAtual);
         }
-        
-       if (prazoParaPagamento > 10)
-        {
-            percentualMulta = (percentualMulta*valorDoBem)/100;
-            multaInadimplencia = (valorDoBem*percentualMulta);
-            return multaInadimplencia;
+        if (now>=prazoParaPagamento && now<prazoParaPagamento+604800){
+            valorAtual = valorDoBem+(percentualMulta*20/100)/2;
+            return (valorAtual);
         }
+        else {
+            valorAtual = valorDoBem+(percentualMulta*20/100);
+            return (valorAtual);
+        }
+
     }
     
-    function valorAtualizado (uint256 valorDoBem, uint256 multaInadimplencia) public returns (uint256 valorAtual) 
-        {
-        // O valor atualizado é o valor do bem mais a multa
-        valorAtual = (valorDoBem+multaInadimplencia);
-        valor = valorAtualizado;
-        }
-    
-    function multaInadimplenciaPelaMetade (uint valorDoBem, uint prazo, uint multaInadimplencia) public returns (uint multaInadimplenciaPelaMetade)
+    function rescisao() public returns (string memory)
     {
-   
-        if (prazoParaPagamento > 10 && prazoParaPagamento < 12)
-        {
-        percentualMulta = (percentualMulta*valorDoBem)/100;
-        multaInadimplencia = (valorDoBem*percentualMulta);
-        multaInadimplencia/2;
-        return multaInadimplenciaPelaMetade;
-        }
-    }
-    
-    function rescisão( uint prazoParaPagamento, uint dias, prazoMaximoDePagamento) public
-    {
-        require (prazoParaPagamento > 30, "rescisão");
-        for (uint i=1; i <prazoParaPagamento; i++){
-            
-            }  
-    }
+        require (now>prazoParaRescisao, "prazo de rescisão não atingido");
+        contratoAtivo = false;
+        string memory mensagem = "Contrado Rescindido";
+        return(mensagem);
+    }  
+}
